@@ -23,8 +23,6 @@ def fetch_realtime_data(url):
         sma_5 = df['close'].rolling(window=5).mean().iloc[-1]
         ema_10 = df['close'].ewm(span=10, adjust=False).mean().iloc[-1]
 
-        #print("sma",df['close'].rolling(window=5).mean())
-        #print("ema",df['close'].ewm(span=10, adjust=False).mean())
         # Create a DataFrame in the same structure as your training data
         features = pd.DataFrame({
             'Prev_Close': [prev_close],
@@ -45,7 +43,8 @@ def fetch_realtime_data(url):
 rf_model = joblib.load('random_forest_stock_model.pkl')
 
 # URL of the API that provides the real-time data
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TCS&apikey=R6473GSLIS4FVKXC'
+# Create your own API key
+url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=TCS&apikey=apikey'
 
 # Fetching the real-time features
 realtime_features = fetch_realtime_data(url)
