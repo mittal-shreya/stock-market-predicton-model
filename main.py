@@ -33,12 +33,6 @@ data['Prev_Volume'] = data['Volume'].shift(1)
 data['SMA_5'] = data['Close'].rolling(window=5).mean().shift(1)
 data['EMA_10'] = data['Close'].ewm(span=10, adjust=False).mean().shift(1)
 
-#print("sma", data['Close'].rolling(window=5).mean())
-#print("ema", data['Close'].ewm(span=10, adjust=False).mean())
-
-#print('prev_close', data['Close'].shift(1))
-#print('prev_volume', data['Volume'].shift(1))
-
 # Drop any additional rows with NaN values created by rolling functions
 data.dropna(inplace=True)
 
@@ -47,8 +41,8 @@ features = ['Prev_Close', 'Prev_Volume', 'SMA_5', 'EMA_10']
 target = 'Close'
 
 # Select the features and target from the DataFrame
-X = data[features]  # Features
-y = data[target]    # Target
+X = data[features]  
+y = data[target]    
 
 # Split the data into training and testing sets (70% train, 30% test)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.35, random_state=42)
